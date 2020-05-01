@@ -6,9 +6,9 @@ This repository contains all sources and models useful to infer V(D)J
 recombination related processes for TCR or BCR sequencing data using
 *IGoR*.
 
-IGoR's exhaustive *_documentation can be found http://qmarcou.github.io/IGoR[here]_*!
+IGoR's exhaustive *_documentation can be found http://statbiophys.github.io/IGoR[here]_*!
 
-Download the latest release https://github.com/qmarcou/IGoR/releases[here].
+Download the latest release https://github.com/statbiophys/IGoR/releases[here].
 
 [[quick-summary]]
 Quick summary
@@ -55,7 +55,7 @@ Contact
 -------
 
 For any question or issue please open an
-https://github.com/qmarcou/IGoR/issues[issue] or email mailto:quentin.marcou@lpt.ens.fr[us].
+https://github.com/statbiophys/IGoR/issues[issue] or email mailto:quentin.marcou@lpt.ens.fr[us].
 
 
 Copying
