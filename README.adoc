@@ -41,11 +41,11 @@ Version
 -------
 
 include::./docs/asciidoc/version.adoc[]
-Download the latest release https://github.com/qmarcou/IGoR/releases[here].
+Download the latest release https://github.com/statbiophys/IGoR/releases[here].
 
 Documentation
 -------------
-A comprehensive documentation of IGoR is available on the internet at: http://qmarcou.github.io/IGoR[http://qmarcou.github.io/IGoR] or in your local installation of IGoR as the `./docs/index.html` file. 
+A comprehensive documentation of IGoR is available on the internet at: http://statbiophys.github.io/IGoR[http://statbiophys.github.io/IGoR] or in your local installation of IGoR as the `./docs/index.html` file. 
 
 include::./docs/asciidoc/general/contribute.adoc[]
 
