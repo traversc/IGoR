@@ -43,8 +43,8 @@ CDR3SeqData::CDR3SeqData() {
 //	CDR3aa    = "";
 //}
 
-CDR3SeqData::CDR3SeqData(const CDR3SeqData& orig) {
-}
+//CDR3SeqData::CDR3SeqData(const CDR3SeqData& orig) {
+//}
 
 CDR3SeqData::~CDR3SeqData() {
 }
