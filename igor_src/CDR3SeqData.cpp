@@ -23,7 +23,6 @@
  *
  */
 
-#include <string>
 
 #include "CDR3SeqData.h"
 

@@ -1,0 +1,3 @@
+#!/bin/bash
+# TODO: IF -set_wd in options don't use set_wd
+docker run --rm -v "$(pwd)":/igor_data -u ${UID}  -it digor:dev -set_wd /igor_data $@
