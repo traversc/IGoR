@@ -21,6 +21,7 @@ WORKDIR /programs/IGoR
 RUN ./autogen.sh
 RUN ./configure && make && make install
 RUN rm -r /programs/IGoR
+RUN apt-get install -y man
 
 # WORKDIR /programs
 # RUN git clone https://github.com/statbiophys/pygor3.git
