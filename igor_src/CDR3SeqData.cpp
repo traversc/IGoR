@@ -58,4 +58,27 @@ std::string CDR3SeqData::strData(){
 					CDR3aa;	
 }
 
+std::string CDR3SeqData::strData_full(){
+	std::string str_CSV_sep= ";";
+	// std::string str_data_line;
+	std::stringstream sstm;
+	sstm << seq_index << str_CSV_sep
+			<< v_anchor << str_CSV_sep
+			<< j_anchor << str_CSV_sep
+			<< CDR3nt << str_CSV_sep
+			<< CDR3aa << str_CSV_sep
+			<< v_call << str_CSV_sep
+			<< j_call << str_CSV_sep
+			<< v_offset << str_CSV_sep
+			<< j_offset << str_CSV_sep
+			<< std::boolalpha
+			<< b_functional << str_CSV_sep
+			<< b_in_frame << str_CSV_sep
+			<< b_stop_codon;
+
+	//str_data_line = ""+ sstm.str();
+	return ""+ sstm.str();
+
+}
+
 

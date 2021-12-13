@@ -88,6 +88,9 @@ CDR3SeqData ExtractFeatures::extractCDR3(int seq_index){
 	string seq_str = (*p_sorted_alignments)[seq_index].first;
 	CDR3SeqData cdr3 = CDR3SeqData();
 	cdr3.seq_index = seq_index;
+	cdr3.b_functional = false;
+	cdr3.b_in_frame = false;
+	cdr3.b_stop_codon = false;
 	
 	///////////////
 	// V anchor  //
@@ -98,6 +101,7 @@ CDR3SeqData ExtractFeatures::extractCDR3(int seq_index){
 	if ( Vec_V_Alignment_data.size() > 0 ){
 		Alignment_data v_alig = Vec_V_Alignment_data.front();
 		cdr3.v_anchor  = getVAnchor4Seq(seq_str, v_alig);
+		cdr3.v_call = v_alig.gene_name;
 	}
 	
 	///////////////
@@ -109,8 +113,55 @@ CDR3SeqData ExtractFeatures::extractCDR3(int seq_index){
 	if ( Vec_J_Alignment_data.size() > 0 ){
 		Alignment_data j_alig = Vec_J_Alignment_data.front();
 		cdr3.j_anchor  = getJAnchor4Seq(seq_str, j_alig);
+		cdr3.j_call = j_alig.gene_name;
 	}
 	
+	if (cdr3.v_anchor % 3 == 0){
+		cdr3.b_in_frame = true;
+	}else{
+		cdr3.b_in_frame = false;
+	}
+
+	cdr3.b_stop_codon = false;
+	cdr3.b_functional = true;
+
+	// cout << "found: " << found << ", CDR3nt.length(): " << CDR3nt.length() << endl;
+
+	bool cond_1 = ( cdr3.v_anchor < seq_str.length() );
+	bool cond_2 = ( cdr3.j_anchor < seq_str.length() );
+	bool cond_3 = ( cdr3.v_anchor > 0 );
+	bool cond_4 = ( cdr3.j_anchor > 0 );
+	if ( cond_1 and cond_2 and cond_3 and cond_4){
+
+		cdr3.CDR3nt = seq_str.substr(cdr3.v_anchor, cdr3.j_anchor - cdr3.v_anchor);
+		cdr3.CDR3aa = translate(cdr3.CDR3nt);
+
+
+		if (cdr3.CDR3nt.length() % 3 == 0){
+				size_t found = cdr3.CDR3aa.rfind("*");
+
+				if (found!=string::npos){
+					cdr3.b_functional = false;
+					cdr3.b_stop_codon = true;
+				}else{
+					cdr3.b_stop_codon = false;
+				}
+			}else{
+
+				cdr3.b_functional = false;
+				cdr3.b_stop_codon = true;
+			}
+
+	}else{
+		cdr3.CDR3nt = ""; //seq_str.substr(cdr3.v_anchor, cdr3.j_anchor - cdr3.v_anchor);
+		cdr3.CDR3aa = ""; //translate(cdr3.CDR3nt);
+		cdr3.b_functional = false;
+		cdr3.b_stop_codon = false;
+	}
+
+
+
+
 	return cdr3;
 
 }
@@ -214,29 +265,33 @@ int ExtractFeatures::getJAnchor4Seq(string seq_str, Alignment_data j_alig){
  */
 string ExtractFeatures::generateCDR3_csv_line(CDR3SeqData cdr3InputSeq){
 	// seq_index;v_anchor;j_anchor;CDR3nt;CDR3aa
-	string strCSVdelimiter = ";";
+	string str_CSV_sep = ";";
 	string seq_str = (*p_sorted_alignments)[cdr3InputSeq.seq_index].first;
 	
 	stringstream sstm;
 	sstm.str("");
-	sstm << cdr3InputSeq.seq_index << strCSVdelimiter;
+	sstm << cdr3InputSeq.seq_index << str_CSV_sep;
 	
 	
 	bool bNoV = ((cdr3InputSeq.v_anchor < 0 ) or (cdr3InputSeq.v_anchor > seq_str.size() ) );
 	bool bNoJ = ((cdr3InputSeq.j_anchor < 0 ) or (cdr3InputSeq.j_anchor > seq_str.size() ) );
 	if ( bNoV or bNoJ ){
-		sstm << strCSVdelimiter;
-		sstm << strCSVdelimiter;
-		sstm << strCSVdelimiter;
+		sstm << str_CSV_sep; // v_anchor
+		sstm << str_CSV_sep; // j_anchor
+		sstm << str_CSV_sep; // CDR3_nt
+		sstm << str_CSV_sep; // CDR3_aa
+		sstm << str_CSV_sep; // v_call
+		//sstm << str_CSV_sep; // j_call
 	}else{
-		sstm << cdr3InputSeq.v_anchor  << strCSVdelimiter;
-		sstm << cdr3InputSeq.j_anchor  << strCSVdelimiter;
+		sstm << cdr3InputSeq.v_anchor  << str_CSV_sep;
+		sstm << cdr3InputSeq.j_anchor  << str_CSV_sep;
 		string strCDR3 = seq_str.substr(cdr3InputSeq.v_anchor, cdr3InputSeq.j_anchor - cdr3InputSeq.v_anchor);
-		sstm << strCDR3 << strCSVdelimiter;
-		sstm << translate(strCDR3);
+		sstm << strCDR3 << str_CSV_sep;
+		sstm << translate(strCDR3) << str_CSV_sep;
+		sstm << cdr3InputSeq.v_call  << str_CSV_sep;
+		sstm << cdr3InputSeq.j_call;
 	}
 	
 	return ( ""+ sstm.str() );
 	
 }
-

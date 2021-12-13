@@ -1989,8 +1989,22 @@ int main(int argc , char* argv[]){
 
 
 				string flnIndexedCDR3      = cl_path_aligns     + "indexed_CDR3s.csv";
+				string flnIndexedFunctionality      = cl_path_aligns     + "indexed_functionality.csv";
+
 				ofstream ofileIndexedCDR3(flnIndexedCDR3);
-				ofileIndexedCDR3 << "seq_index;v_anchor;j_anchor;CDR3nt;CDR3aa"<<endl;
+				ofstream ofileIndexedFunctionality(flnIndexedFunctionality);
+				string str_CSV_sep = ";";
+				ofileIndexedCDR3 << "seq_index"
+						<< str_CSV_sep << "v_anchor"
+						<< str_CSV_sep << "j_anchor"
+						<< str_CSV_sep << "CDR3nt"
+						<< str_CSV_sep << "CDR3aa"
+						<< str_CSV_sep << "v_call"
+						<< str_CSV_sep << "j_call"<<endl;
+				ofileIndexedFunctionality << "seq_index"
+						<< str_CSV_sep << "functionality"
+						<< str_CSV_sep << "in_frame"
+						<< str_CSV_sep << "stop_codon" << endl;
 
 				ExtractFeatures featureCDR3;
 				featureCDR3.load_VJgenomicTemplates(v_genomic, j_genomic);
@@ -2003,8 +2017,14 @@ int main(int argc , char* argv[]){
 					int seq_index = (*seq_it).first;
 					cdr3InputSeq = featureCDR3.extractCDR3( seq_index );
 					ofileIndexedCDR3 << featureCDR3.generateCDR3_csv_line(cdr3InputSeq) << endl;
+					// Functionality
+					ofileIndexedFunctionality << seq_index
+							<< str_CSV_sep << cdr3InputSeq.b_functional
+							<< str_CSV_sep << cdr3InputSeq.b_in_frame
+							<< str_CSV_sep << cdr3InputSeq.b_stop_codon << endl;
 				}
 				ofileIndexedCDR3.close();
+				ofileIndexedFunctionality.close();
 			} // end extractCDR3
 		}//end align
 

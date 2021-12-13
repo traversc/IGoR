@@ -521,3 +521,38 @@ string translate(string seq){
 		return AAChain;
 	}
 }
+
+///**
+// * \param seq: DNA sequence to functionality.
+// * \return boolian if functional true.
+// */
+//string b_is_functional(string seq, int v_anchor_pos, int j_anchor_pos){
+//
+//	// 1. Check if CDR3 is multiple of 3
+//	// to determine if is in-frame use v_anchor_pos
+//	//
+//	size_t codonPos = 0;
+//	const size_t codonLen = 3;
+//	size_t seqLen = seq.length();
+//	string strCodon = "";
+//	string AA ="";
+//	string AAChain ="";
+//	bool stopCodonQ = false;
+//	if (seqLen % codonLen == 0){
+//		while ((codonPos < seqLen) ){
+//			strCodon = seq.substr(codonPos, codonLen);
+//	//		cout << strCodon << " codonPos: " << codonPos << endl;
+//			codonPos += codonLen;
+//			AA = CodonTableStandard[strCodon];
+//			if (AA == "*"){
+//				stopCodonQ = true;
+//				return false;
+//			}
+//			AAChain +=  AA;
+//		}
+//		return AAChain;
+//	}else{
+//		// FIXME: Add a message? or leave it blank?
+//		return AAChain;
+//	}
+//}

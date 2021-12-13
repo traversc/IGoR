@@ -45,9 +45,9 @@ public:
     ExtractFeatures(const ExtractFeatures& orig);
     virtual ~ExtractFeatures();
     
-    unordered_map<string, string> UMap_v_genomic;
+    unordered_map<string, string> UMap_v_genomic; // gene_name , sequence
     unordered_map<string, string> UMap_j_genomic;
-    unordered_map<string, size_t> UMap_v_CDR3_anchors; 
+    unordered_map<string, size_t> UMap_v_CDR3_anchors; // gene_name, position
     unordered_map<string, size_t> UMap_j_CDR3_anchors;
 //    vector<pair<const int, const string>> *p_indexed_seqlist;
     unordered_map<int,pair<string,unordered_map<Gene_class,vector<Alignment_data>>>>  *p_sorted_alignments;
