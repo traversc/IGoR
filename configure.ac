@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([igor], [1.4.1], [statbiophys@phys.ens.fr], [igor], [https://github.com/statbiophys/IGoR])
+AC_INIT([igor], [1.4.2], [statbiophys@phys.ens.fr], [igor], [https://github.com/statbiophys/IGoR])
 
 AM_INIT_AUTOMAKE([foreign -Wall -Werror])
 

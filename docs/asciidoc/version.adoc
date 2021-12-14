@@ -1,1 +1,1 @@
-Latest released version: 1.4.1
+Latest released version: 1.4.2
