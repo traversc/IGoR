@@ -2,7 +2,11 @@ Following are change highlights associated with official releases.  Important
 bug fixes are all mentioned, but some internal enhancements are omitted here for
 brevity.  Much more detail can be found in the git revision history:
 
-    https://github.com/qmarcou/IGoR
+    https://github.com/statbiophys/IGoR
+* 1.4.2 (April 11, 2020)
+  New feature:
+  - New file to specify functionality of input sequences, obtained from best aligments (by @alfaceor)
+
 
 * 1.4.0 (April 11, 2020)
 
